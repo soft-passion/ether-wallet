@@ -58,7 +58,23 @@ function ETHER_WALLET_form_shortcode( $attributes )
     
     $js = '';
     $ret = "
+    <div class='twbs'><div class='container-fluid'>
+        <div class='row ethereum-wallet-balance-content'>
+            <div class='col-md-6 col-6 text-right ethereum-wallet-balance-value-wrapper'>
+                <div id='ether-wallet-balance' class='ethereum-wallet-balance-value'>10</div>
+            </div>
+            <div class='col-md-6 col-6 ethereum-wallet-balance-token-name-wrapper'>
+                <div class='ethereum-wallet-balance-token-name'>ETH</div>
+            </div>
+        </div>
+    </div></div>
     <div class='twbs'>
+        <div class='form-group'>
+            <label class='control-label' for='sendFrom'>Account</label>
+            <div class='input-group' style='margin-top: 8px'>
+                <select id='sendFrom' class='form-control'></select>
+            </div>
+        </div>
         <div class='form-group'>
             <label class='control-label' for='userEntropy'>New Wallet</label>
             <div class='input-group' style='margin-top: 8px'>
@@ -97,7 +113,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
             </div>
         </div>
 
-        <div class='form-group'>
+        <div class='form-group' style='display:none'>
             <label class='control-label' for='numAddr'>Show Addresses</label>
             <div class='input-group' style='margin-top: 8px'>
                 <input id='numAddr' class='form-control' size='80' type='text' value='3'/>
@@ -116,52 +132,50 @@ function ETHER_WALLET_form_shortcode( $attributes )
             </div>
         </div>
   
-  <div id='addr'></div>
-  <div>
-    <button onClick='getBalances()'>Refresh</button>
-  </div>
+    <div id='addr'></div>
 
-        <label class='control-label' >Send Ether</label>
-        <div class='form-group'>
-            <div class='input-group' style='margin-top: 8px'>
-                <label class='control-label' for='sendFrom'>From: </label>
-                <select id='sendFrom' class='form-control'></select>
-            </div>
-            <div class='input-group' style='margin-top: 8px'>
-                <label class='control-label' for='sendTo'>To: </label>
-                <input id='sendTo' size='40' type='text' class='form-control'/>
-            </div>
-            <div class='input-group' style='margin-top: 8px'>
-                <label class='control-label' for='sendTo'>Ether: </label>
-                <input id='sendValueAmount' type='text' class='form-control'/>
-                <span class='input-group-append'>
-                    <div class='btn-group' role='group'>
-                        <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
-                                data-toggle='collapse' 
-                                onclick='sendEth()'
-                                role='button' aria-expanded='false' 
-                                aria-controls='ethereum-wallet-to-qr1' 
-                                title='Send Ether'>
-                            <i class='fa fa-paper-plane' aria-hidden='true'></i>
-                        </button>
-                    </div>
-                </span>
-            </div>
+    <div class='form-group'>
+        <button 
+            id='ethereum-wallet-account-management-create-send-button' 
+            name='ethereum-wallet-account-management-create-send-button' 
+            class='button btn btn-default float-right col-12 col-md-4'>Refresh</button>
+    </div>
+    <div class='form-group'>
+        <label class='control-label' for='sendTo'>To: </label>
+        <div class='input-group' style='margin-top: 8px'>
+            <input id='sendTo' size='40' type='text' class='form-control'/>
         </div>
+        <label class='control-label' for='sendTo'>Amount: </label>
+        <div class='input-group' style='margin-top: 8px'>
+            <input id='sendValueAmount' type='text' class='form-control'/>
+        </div>
+    </div>
+    <div class='form-group'>
+        <button 
+            id='ethereum-wallet-account-management-create-send-button' 
+            name='ethereum-wallet-account-management-create-send-button' 
+            class='button btn btn-default float-right col-12 col-md-4' onclick='sendEth()'>Send</button>
+    </div>
+</div>
 
+<div class='twbs'>
+    <div class='form-group'>
+        <button 
+            id='ethereum-wallet-account-management-create-send-button' 
+            name='ethereum-wallet-account-management-create-send-button' 
+            class='button btn btn-default col-12 col-md-4' onclick='showSeed()'>Show Seed</button>
+    </div>
   
-  <button onclick='showSeed()'>Show Seed</button>
-    
-  <h6>Function Call</h6>
-  <div>Caller: <select id='functionCaller'></select></div>
-  <div>Contract Address: <input id='contractAddr' size='40' type='text' /></div>
-  <div>Contract ABI: <input id='contractAbi' size='40' type='text' /></div>
-  <div>Function Name: <input id='functionName' size='20' type='text' /></div>
-  <div>Function Arguments: <input id='functionArgs' size='40' type='text' /></div>
-  <div>Value (Ether): <input id='sendValueAmount' type='text'></div>
-  <div>
-    <button onclick='functionCall()'>Call Function</button>
-  </div>
+    <h6>Function Call</h6>
+    <div>Caller: <select id='functionCaller'></select></div>
+    <div>Contract Address: <input id='contractAddr' size='40' type='text' /></div>
+    <div>Contract ABI: <input id='contractAbi' size='40' type='text' /></div>
+    <div>Function Name: <input id='functionName' size='20' type='text' /></div>
+    <div>Function Arguments: <input id='functionArgs' size='40' type='text' /></div>
+    <div>Value (Ether): <input id='sendValueAmount' type='text'></div>
+    <div>
+        <button onclick='functionCall()'>Call Function</button>
+    </div>
   </div>";
     ETHER_WALLET_enqueue_scripts_();
     wp_enqueue_script( 'jsQR' );
@@ -386,35 +400,13 @@ function ETHER_WALLET_enqueue_script()
             array( 'jquery', 'web3' )
         );
     }
-  
+
+    $provider = ( !empty($options['provider']) ? esc_attr( $options['provider'] ) : '' );
+    wp_localize_script( 'ether-wallet', 'etherWallet', [
+        'provider'              => esc_html( $provider ),
+    ] );  
 }
-/*
-wp_localize_script( 'ether-wallet', 'etherWallet', [
-        'user_wallet_address'              => esc_html( $accountAddress ),
-        'user_wallet_last_txhash'          => esc_html( $lastTxHash ),
-        'user_wallet_last_txtime'          => esc_html( $lastTxTime ),
-        'user_wallet_last_tx_to'           => esc_html( $lastTxTo ),
-        'user_wallet_last_tx_value'        => esc_html( $lastTxValue ),
-        'user_wallet_last_tx_currency'     => esc_html( $lastTxCurrency ),
-        'tokens'                           => esc_html( $tokens_json ),
-        'site_url'                         => esc_html( site_url() ),
-        'web3Endpoint'                     => esc_html( ETHER_WALLET_getWeb3Endpoint() ),
-        'etherscanApiKey'                  => $etherscanApiKey,
-        'blockchain_network'               => esc_html( $blockchain_network ),
-        'gasLimit'                         => esc_html( $gaslimit ),
-        'gasPrice'                         => esc_html( $gasprice ),
-        'localePath'                       => esc_html( $ETHER_WALLET_plugin_url_path . "/i18n/" . get_locale() . ".json" ),
-        'str_copied_msg'                   => __( 'Copied to clipboard', 'ether-wallet' ),
-        'str_insufficient_eth_balance_msg' => __( 'Insufficient Ether balance for tx fee payment.', 'ether-wallet' ),
-        'str_unknown_token_symbol_msg'     => __( 'Unknown', 'ether-wallet' ),
-        'str_tx_pending_msg'               => __( 'Pending', 'ether-wallet' ),
-        'str_prev_tx_pending_msg'          => __( 'Previous transaction is still not confirmed or failed', 'ether-wallet' ),
-        'str_date_recently_msg'            => __( 'recently', 'ether-wallet' ),
-        'str_date_days_fmt_msg'            => __( '%1$s days', 'ether-wallet' ),
-        'str_date_hours_fmt_msg'           => __( '%1$s hours', 'ether-wallet' ),
-        'str_date_minutes_fmt_msg'         => __( '%1$s minutes', 'ether-wallet' ),
-    ] );
-*/                    
+                    
 add_action( 'wp_enqueue_scripts', 'ETHER_WALLET_enqueue_script' );
 /**
  * Admin Options

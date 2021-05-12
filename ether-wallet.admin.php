@@ -25,7 +25,7 @@ function ETHER_WALLET_options_page()
         //        }
         $new_options['gas_limit'] = ( !empty($_POST['ETHER_WALLET_gas_limit']) && is_numeric( $_POST['ETHER_WALLET_gas_limit'] ) ? intval( sanitize_text_field( $_POST['ETHER_WALLET_gas_limit'] ) ) : 200000 );
         $new_options['gas_price'] = ( !empty($_POST['ETHER_WALLET_gas_price']) && is_numeric( $_POST['ETHER_WALLET_gas_price'] ) ? floatval( sanitize_text_field( $_POST['ETHER_WALLET_gas_price'] ) ) : 2 );
-        $new_options['blockchain_network'] = ( !empty($_POST['ETHER_WALLET_blockchain_network']) ? sanitize_text_field( $_POST['ETHER_WALLET_blockchain_network'] ) : 'mainnet' );
+        $new_options['provider'] = ( !empty($_POST['ETHER_WALLET_provider']) ? sanitize_text_field( $_POST['ETHER_WALLET_provider'] ) : '' );
         $new_options['infuraApiKey'] = ( !empty($_POST['ETHER_WALLET_infuraApiKey']) ? sanitize_text_field( $_POST['ETHER_WALLET_infuraApiKey'] ) : '' );
         // Get all existing Ethereum Wallet options
         $existing_options = get_option( 'ether-wallet_options', array() );
@@ -122,8 +122,8 @@ function ETHER_WALLET_options_page()
         ?></th>
 			<td><fieldset>
 				<label>
-                    <input class="text" name="ETHER_WALLET_blockchain_network" type="text" maxlength="128" placeholder="mainnet" value="<?php 
-        echo  ( !empty($options['blockchain_network']) ? esc_attr( $options['blockchain_network'] ) : 'mainnet' ) ;
+                    <input class="text" name="ETHER_WALLET_provider" type="text" maxlength="128" placeholder="mainnet" value="<?php 
+        echo  ( !empty($options['provider']) ? esc_attr( $options['provider'] ) : 'mainnet' ) ;
         ?>">
                     <p><?php 
         _e( "The blockchain used: mainnet or ropsten. Use mainnet in production, and ropsten in test mode. See plugin documentation for the testing guide.", 'ether-wallet' );
