@@ -58,31 +58,100 @@ function ETHER_WALLET_form_shortcode( $attributes )
     
     $js = '';
     $ret = "
-  <h6>New Wallet</h6>
-  <div><input id='userEntropy' placeholder='Type random text to generate entropy' size='80' type='text' />
-    <button onclick='newWallet()'>Create New Wallet</button>
-  </div>
-  <h6>Restore Wallet</h6>
-  <div><input id='seed' size='80' type='text' value='' />
-    <button onclick='setSeed()'>Restore wallet from Seed</button>
-  </div>
-  <h6>Show Addresses</h6>
-  <div>Show <input id='numAddr' size=v5' type='text' value='3' /> more address(es)
-    <button onclick='newAddresses(\'\')'>Show</button>
-  </div>
+    <div class='twbs'>
+        <div class='form-group'>
+            <label class='control-label' for='userEntropy'>New Wallet</label>
+            <div class='input-group' style='margin-top: 8px'>
+                <input id='userEntropy' class='form-control' placeholder='Type random text to generate entropy' size='80' type='text' />
+                <span class='input-group-append'>
+                    <div class='btn-group' role='group'>
+                        <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
+                                data-toggle='collapse' 
+                                onclick='newWallet()'
+                                role='button' aria-expanded='false' 
+                                aria-controls='ethereum-wallet-to-qr1' 
+                                title='Create New Wallet'>
+                            <i class='fa fa-file' aria-hidden='true'></i>
+                        </button>
+                    </div>
+                </span>
+            </div>
+        </div>
+
+        <div class='form-group'>
+            <label class='control-label' for='seed'>Restore Wallet</label>
+            <div class='input-group' style='margin-top: 8px'>
+                <input id='seed' class='form-control' size='80' type='text' value=''/>
+                <span class='input-group-append'>
+                    <div class='btn-group' role='group'>
+                        <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
+                                data-toggle='collapse' 
+                                onclick='setSeed()'
+                                role='button' aria-expanded='false' 
+                                aria-controls='ethereum-wallet-to-qr1' 
+                                title='Restore wallet from Seed'>
+                            <i class='fa fa-folder-open' aria-hidden='true'></i>
+                        </button>
+                    </div>
+                </span>
+            </div>
+        </div>
+
+        <div class='form-group'>
+            <label class='control-label' for='numAddr'>Show Addresses</label>
+            <div class='input-group' style='margin-top: 8px'>
+                <input id='numAddr' class='form-control' size='80' type='text' value='3'/>
+                <span class='input-group-append'>
+                    <div class='btn-group' role='group'>
+                        <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
+                                data-toggle='collapse' 
+                                onclick='newAddresses(\'\')'
+                                role='button' aria-expanded='false' 
+                                aria-controls='ethereum-wallet-to-qr1' 
+                                title='Show'>
+                            <i class='fa fa-check-circle' aria-hidden='true'></i>
+                        </button>
+                    </div>
+                </span>
+            </div>
+        </div>
+  
   <div id='addr'></div>
   <div>
     <button onClick='getBalances()'>Refresh</button>
   </div>
-  <h6>Send Ether</h6>
-  <div>From: <select id='sendFrom'></select></div>
-  <div>To: <input id='sendTo' size='40' type='text' /></div>
-  <div>Ether: <input id='sendValueAmount' type='text'></div>
-  <div>
-    <button onclick='sendEth()'>Send Ether</button>
-  </div>
-  <h6>Show Seed</h6>
+
+        <label class='control-label' >Send Ether</label>
+        <div class='form-group'>
+            <div class='input-group' style='margin-top: 8px'>
+                <label class='control-label' for='sendFrom'>From: </label>
+                <select id='sendFrom' class='form-control'></select>
+            </div>
+            <div class='input-group' style='margin-top: 8px'>
+                <label class='control-label' for='sendTo'>To: </label>
+                <input id='sendTo' size='40' type='text' class='form-control'/>
+            </div>
+            <div class='input-group' style='margin-top: 8px'>
+                <label class='control-label' for='sendTo'>Ether: </label>
+                <input id='sendValueAmount' type='text' class='form-control'/>
+                <span class='input-group-append'>
+                    <div class='btn-group' role='group'>
+                        <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
+                                data-toggle='collapse' 
+                                onclick='sendEth()'
+                                role='button' aria-expanded='false' 
+                                aria-controls='ethereum-wallet-to-qr1' 
+                                title='Send Ether'>
+                            <i class='fa fa-paper-plane' aria-hidden='true'></i>
+                        </button>
+                    </div>
+                </span>
+            </div>
+        </div>
+
+  
   <button onclick='showSeed()'>Show Seed</button>
+    
   <h6>Function Call</h6>
   <div>Caller: <select id='functionCaller'></select></div>
   <div>Contract Address: <input id='contractAddr' size='40' type='text' /></div>
@@ -92,6 +161,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
   <div>Value (Ether): <input id='sendValueAmount' type='text'></div>
   <div>
     <button onclick='functionCall()'>Call Function</button>
+  </div>
   </div>";
     ETHER_WALLET_enqueue_scripts_();
     wp_enqueue_script( 'jsQR' );
