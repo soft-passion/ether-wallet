@@ -118,12 +118,12 @@ function ETHER_WALLET_options_page()
 			
 			<tr valign="top">
 			<th scope="row"><?php 
-        _e( "Blockchain", 'ether-wallet' );
+        _e( "Provider", 'ether-wallet' );
         ?></th>
 			<td><fieldset>
 				<label>
-                    <input class="text" name="ETHER_WALLET_provider" type="text" maxlength="128" placeholder="mainnet" value="<?php 
-        echo  ( !empty($options['provider']) ? esc_attr( $options['provider'] ) : 'mainnet' ) ;
+                    <input class="text" name="ETHER_WALLET_provider" type="text" maxlength="1024" value="<?php 
+        echo  ( !empty($options['provider']) ? esc_attr( $options['provider'] ) : '' ) ;
         ?>">
                     <p><?php 
         _e( "The blockchain used: mainnet or ropsten. Use mainnet in production, and ropsten in test mode. See plugin documentation for the testing guide.", 'ether-wallet' );

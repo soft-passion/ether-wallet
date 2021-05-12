@@ -3,7 +3,7 @@ var web3 = new Web3();
 
       function setWeb3Provider(keystore) {
         var web3Provider = new HookedWeb3Provider({
-          host: 'https://rinkeby.infura.io/',
+          host: window.ethereumWallet.provider,
           transaction_signer: keystore
         });
 
