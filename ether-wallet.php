@@ -230,7 +230,6 @@ function ETHER_WALLET_enqueue_scripts_()
     //-------------------------//
     wp_enqueue_script( 'ether-wallet' );
     wp_enqueue_script( 'functions' );
-    wp_enqueue_script( 'store' );
 }
 
 function ETHER_WALLET_stylesheet()
@@ -304,7 +303,7 @@ function ETHER_WALLET_enqueue_script()
         wp_deregister_script( 'web3' );
         wp_register_script(
             'web3',
-            $ETHER_WALLET_plugin_url_path . "/js/web3.min.js",
+            $ETHER_WALLET_plugin_url_path . "/js/web3.js",
             array( 'jquery' ),
             '0.20.6'
         );
@@ -395,25 +394,13 @@ function ETHER_WALLET_enqueue_script()
             '2.0.4'
         );
     }
-    
-    
-    if ( !wp_script_is( 'ether-wallet', 'queue' ) && !wp_script_is( 'ether-wallet', 'done' ) ) {
-        wp_dequeue_script( 'ether-wallet' );
-        wp_deregister_script( 'ether-wallet' );
-        wp_register_script(
-            'ether-wallet',
-            $ETHER_WALLET_plugin_url_path . "/lightwallet.js",
-            array( 'jquery', 'web3')
-        );
-    }
 
     if ( !wp_script_is( 'functions', 'queue' ) && !wp_script_is( 'functions', 'done' ) ) {
         wp_dequeue_script( 'functions' );
         wp_deregister_script( 'functions' );
         wp_register_script(
             'functions',
-            $ETHER_WALLET_plugin_url_path . "/functions.js",
-            array( 'jquery', 'web3' )
+            $ETHER_WALLET_plugin_url_path . "/functions.js"
         );
     }
 
@@ -422,7 +409,35 @@ function ETHER_WALLET_enqueue_script()
         wp_deregister_script( 'store' );
         wp_register_script(
             'store',
-            $ETHER_WALLET_plugin_url_path . "/store.legacy.min.js"
+            $ETHER_WALLET_plugin_url_path . "/js/store.legacy.min.js"
+        );
+    }
+
+    if ( !wp_script_is( 'web3provider', 'queue' ) && !wp_script_is( 'web3provider', 'done' ) ) {
+        wp_dequeue_script( 'web3provider' );
+        wp_deregister_script( 'web3provider' );
+        wp_register_script(
+            'web3provider',
+            $ETHER_WALLET_plugin_url_path . "/js/hooked-web3-provider.js",
+        );
+    }
+
+    if ( !wp_script_is( 'async', 'queue' ) && !wp_script_is( 'async', 'done' ) ) {
+        wp_dequeue_script( 'async' );
+        wp_deregister_script( 'async' );
+        wp_register_script(
+            'async',
+            $ETHER_WALLET_plugin_url_path . "/js/async.js",
+        );
+    }
+
+    if ( !wp_script_is( 'ether-wallet', 'queue' ) && !wp_script_is( 'ether-wallet', 'done' ) ) {
+        wp_dequeue_script( 'ether-wallet' );
+        wp_deregister_script( 'ether-wallet' );
+        wp_register_script(
+            'ether-wallet',
+            $ETHER_WALLET_plugin_url_path . "/lightwallet.js",
+            array( 'jquery', 'web3', 'web3provider', 'store', 'async')
         );
     }
 
