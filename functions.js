@@ -3,7 +3,7 @@ var global_keystore;
 
 function setWeb3Provider(keystore) {
   var web3Provider = new HookedWeb3Provider({
-    host: window.ethereumWallet.provider,
+    host: "http://test",
     transaction_signer: keystore
   });
 
@@ -21,15 +21,11 @@ function newAddresses(password) {
     global_keystore.generateNewAddress(pwDerivedKey, numAddr);
 
     var addresses = global_keystore.getAddresses();
-
-    document.getElementById('sendFrom').innerHTML = '';
-    document.getElementById('functionCaller').innerHTML = '';
-
-    for (var i = 0; i < addresses.length; ++i) {
-      document.getElementById('sendFrom').innerHTML += '<option value="' + addresses[i] + '">' + addresses[i] + '</option>';
-      document.getElementById('functionCaller').innerHTML += '<option value="' + addresses[i] + '">' + addresses[i] + '</option>';
-    }
-
+    document.getElementById('sendFrom').value = '';
+    document.getElementById('functionCaller').value = '';
+    document.getElementById('sendFrom').value = addresses[0];
+    document.getElementById('functionCaller').value = addresses[0];
+    store.set('user', { name: global_keystore.serialize()})
     getBalances();
   });
 }
@@ -41,9 +37,7 @@ function getBalances() {
   async.map(addresses, web3.eth.getBalance, function (err, balances) {
     async.map(addresses, web3.eth.getTransactionCount, function (err, nonces) {
       document.getElementById('addr').innerHTML = '';
-      for (var i = 0; i < addresses.length; ++i) {
-        document.getElementById('addr').innerHTML += '<li class="list-group-item form-control">' + addresses[i] + ' (Bal: ' + (balances[i] / 1.0e18) + ' ETH, Nonce: ' + nonces[i] + ')' + '</li>';
-      }
+        document.getElementById('addr').innerHTML += '<li class="list-group-item form-control">' + addresses[0] + ' (Bal: ' + (balances[0] / 1.0e18) + ' ETH, Nonce: ' + nonces[0] + ')' + '</li>';
     });
   });
 }
@@ -85,7 +79,6 @@ function newWallet() {
     hdPathString: 'm/0\'/0\'/0\''
   }, function (err, ks) {
     global_keystore = ks;
-    store.set('user', { name: ks.serialize()})
     newAddresses(password);
     setWeb3Provider(global_keystore);
     getBalances();
@@ -150,3 +143,17 @@ function functionCall() {
   args.push(callback);
   contract[functionName].apply(this, args);
 }
+
+function init() {
+  let ks = store.get('user').name
+  global_keystore = lightwallet.keystore.deserialize(ks);
+  var addresses = global_keystore.getAddresses();
+  document.getElementById('sendFrom').value = '';
+  document.getElementById('functionCaller').value = '';
+  document.getElementById('sendFrom').value = addresses[0];
+  document.getElementById('functionCaller').value = addresses[0];
+  setWeb3Provider(global_keystore);
+  getBalances();
+}
+
+window.onload = init();

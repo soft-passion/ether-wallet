@@ -65,7 +65,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
                 <div class='form-group'>
                     <label class='control-label' for='sendFrom'>Account</label>
                     <div class='input-group' style='margin-top: 8px'>
-                        <select id='sendFrom' class='form-control'></select>
+                        <input id='sendFrom' class='form-control'></input>
                     </div>
                 </div>
                 <div class='form-group'>
@@ -170,7 +170,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
                             <div class='form-group'>
                                 <label class='control-label' for='contractAddr'>Function Call</label>
                                 <div class='input-group' style='margin-top: 8px'>
-                                    <select id='functionCaller' class='form-control'></select>
+                                    <input id='functionCaller' class='form-control'></input>
                                 </div>
             
                                 <label class='control-label' for='contractAddr'>Contract Address:</label>
