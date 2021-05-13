@@ -227,6 +227,7 @@ add_shortcode( 'ether-wallet-form', 'ETHER_WALLET_form_shortcode' );
 function ETHER_WALLET_enqueue_scripts_()
 {
     wp_enqueue_style( 'ether-wallet' );
+    //-------------------------//
     wp_enqueue_script( 'ether-wallet' );
     wp_enqueue_script( 'functions' );
     wp_enqueue_script( 'store' );
@@ -238,8 +239,7 @@ function ETHER_WALLET_stylesheet()
     $deps = array(
         'font-awesome',
         'bootstrap-ether-wallet',
-        'bootstrap-affix-ether-wallet',
-        'data-tables'
+        'bootstrap-affix-ether-wallet'
     );
     $min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' );
     
@@ -284,7 +284,7 @@ function ETHER_WALLET_stylesheet()
         wp_deregister_style( 'ether-wallet' );
         wp_register_style(
             'ether-wallet',
-            $ETHER_WALLET_plugin_url_path . '/ether-wallet.css',
+            $ETHER_WALLET_plugin_url_path . "/ether-wallet.css",
             $deps,
             '2.8.0'
         );
