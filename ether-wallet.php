@@ -131,15 +131,20 @@ function ETHER_WALLET_form_shortcode( $attributes )
                 </span>
             </div>
         </div>
-  
-    <div id='addr'></div>
 
     <div class='form-group'>
         <button 
             id='ethereum-wallet-account-management-create-send-button' 
             name='ethereum-wallet-account-management-create-send-button' 
-            class='button btn btn-default float-right col-12 col-md-4'>Refresh</button>
+            class='button btn btn-default col-12 col-md-4'>Refresh</button>
     </div>
+
+    <div class='form-group'>
+        <label class='control-label' for='addr'>Balance:</label>
+        <ul class='list-group' id='addr'>
+        </ul>
+    </div>
+
     <div class='form-group'>
         <label class='control-label' for='sendTo'>To: </label>
         <div class='input-group' style='margin-top: 8px'>

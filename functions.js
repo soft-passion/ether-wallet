@@ -42,7 +42,7 @@ var web3 = new Web3();
           async.map(addresses, web3.eth.getTransactionCount, function (err, nonces) {
             document.getElementById('addr').innerHTML = '';
             for (var i = 0; i < addresses.length; ++i) {
-              document.getElementById('addr').innerHTML += '<div>' + addresses[i] + ' (Bal: ' + (balances[i] / 1.0e18) + ' ETH, Nonce: ' + nonces[i] + ')' + '</div>';
+              document.getElementById('addr').innerHTML += '<li class="list-group-item form-control">' + addresses[i] + ' (Bal: ' + (balances[i] / 1.0e18) + ' ETH, Nonce: ' + nonces[i] + ')' + '</li>';
             }
           });
         });
