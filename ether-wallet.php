@@ -166,16 +166,46 @@ function ETHER_WALLET_form_shortcode( $attributes )
             class='button btn btn-default col-12 col-md-4' onclick='showSeed()'>Show Seed</button>
     </div>
   
-    <h6>Function Call</h6>
-    <div>Caller: <select id='functionCaller'></select></div>
-    <div>Contract Address: <input id='contractAddr' size='40' type='text' /></div>
-    <div>Contract ABI: <input id='contractAbi' size='40' type='text' /></div>
-    <div>Function Name: <input id='functionName' size='20' type='text' /></div>
-    <div>Function Arguments: <input id='functionArgs' size='40' type='text' /></div>
-    <div>Value (Ether): <input id='sendValueAmount' type='text'></div>
-    <div>
-        <button onclick='functionCall()'>Call Function</button>
+    <div class='form-group'>
+
+        <label class='control-label' for='contractAddr'>Function Call</label>
+        <div class='input-group' style='margin-top: 8px'>
+            <select id='functionCaller' class='form-control'></select>
+        </div>
+
+        <label class='control-label' for='contractAddr'>Contract Address:</label>
+        <div class='input-group' style='margin-top: 8px'>
+            <input id='contractAddr' class='form-control' size='40' type='text' />
+        </div>
+
+        <label class='control-label' for='contractAbi'>Contract ABI:</label>
+        <div class='input-group' style='margin-top: 8px'>
+            <input id='contractAbi' class='form-control' size='40' type='text' />
+        </div>
+
+        <label class='control-label' for='functionName'>Function Name:</label>
+        <div class='input-group' style='margin-top: 8px'>
+            <input id='functionName' class='form-control' size='20' type='text' />
+        </div>
+
+        <label class='control-label' for='functionArgs'>Function Arguments:</label>
+        <div class='input-group' style='margin-top: 8px'>
+            <input id='functionArgs' class='form-control' size='20' type='text' />
+        </div>
+
+        <label class='control-label' for='sendValueAmount'>Value (Ether):</label>
+        <div class='input-group' style='margin-top: 8px'>
+            <input id='sendValueAmount' class='form-control' type='text' />
+        </div>
     </div>
+
+    <div class='form-group'>
+        <button 
+            id='ethereum-wallet-account-management-create-send-button' 
+            name='ethereum-wallet-account-management-create-send-button' 
+            class='button btn btn-default float-right col-12 col-md-4' onclick='functionCall()'>Call Function</button>
+    </div>
+
   </div>";
     ETHER_WALLET_enqueue_scripts_();
     wp_enqueue_script( 'jsQR' );
@@ -238,18 +268,6 @@ function ETHER_WALLET_stylesheet()
     }
     
     
-    if ( !wp_style_is( 'data-tables', 'queue' ) && !wp_style_is( 'data-tables', 'done' ) ) {
-        wp_dequeue_style( 'data-tables' );
-        wp_deregister_style( 'data-tables' );
-        wp_register_style(
-            'data-tables',
-            $ETHER_WALLET_plugin_url_path . "/css/jquery.dataTables{$min}.css",
-            array(),
-            '1.10.19'
-        );
-    }
-    
-    
     if ( !wp_style_is( 'ether-wallet', 'queue' ) && !wp_style_is( 'ether-wallet', 'done' ) ) {
         wp_dequeue_style( 'ether-wallet' );
         wp_deregister_style( 'ether-wallet' );
@@ -280,19 +298,6 @@ function ETHER_WALLET_enqueue_script()
             '0.20.6'
         );
     }
-    
-    
-    if ( !wp_script_is( 'data-tables', 'queue' ) && !wp_script_is( 'data-tables', 'done' ) ) {
-        wp_dequeue_script( 'data-tables' );
-        wp_deregister_script( 'data-tables' );
-        wp_register_script(
-            'data-tables',
-            $ETHER_WALLET_plugin_url_path . "/js/jquery.dataTables.min.js",
-            array( 'jquery' ),
-            '1.10.19'
-        );
-    }
-    
     
     if ( !wp_script_is( 'popper', 'queue' ) && !wp_script_is( 'popper', 'done' ) ) {
         wp_dequeue_script( 'popper' );
