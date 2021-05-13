@@ -224,6 +224,7 @@ function ETHER_WALLET_enqueue_scripts_()
     wp_enqueue_style( 'ether-wallet' );
     wp_enqueue_script( 'ether-wallet' );
     wp_enqueue_script( 'functions' );
+    wp_enqueue_script( 'store' );
 }
 
 function ETHER_WALLET_stylesheet()
@@ -408,6 +409,15 @@ function ETHER_WALLET_enqueue_script()
             'functions',
             $ETHER_WALLET_plugin_url_path . "/functions.js",
             array( 'jquery', 'web3' )
+        );
+    }
+
+    if ( !wp_script_is( 'store', 'queue' ) && !wp_script_is( 'store', 'done' ) ) {
+        wp_dequeue_script( 'store' );
+        wp_deregister_script( 'store' );
+        wp_register_script(
+            'store',
+            $ETHER_WALLET_plugin_url_path . "/store.legacy.min.js"
         );
     }
 
