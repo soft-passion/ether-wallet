@@ -10,6 +10,14 @@ function setWeb3Provider(keystore) {
   web3.setProvider(web3Provider);
 }
 
+function setProvider(index) {
+  if(index === 0) {
+    document.getElementById("providerBtn").innerText = 'MainNet';
+  } else if(index === 1) {
+    document.getElementById("providerBtn").innerText = 'TestNet';
+  }
+}
+
 function newAddresses(password) {
   if (password == '') {
     password = prompt('Enter password to retrieve addresses', 'Password');

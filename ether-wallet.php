@@ -62,6 +62,15 @@ function ETHER_WALLET_form_shortcode( $attributes )
         <div class='card'>
             <div class='card-body'>
                 <h2 class='card-title'>Ether Wallet</h5>
+                <div class='dropdown'>
+                    <button class='btn btn-primary dropdown-toggle' type='button' id='providerBtn' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                        MainNet
+                    </button>
+                    <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                        <button class='dropdown-item' type='button' onclick='setProvider(0);'>MainNet</button>
+                        <button class='dropdown-item' type='button' onclick='setProvider(1);'>TestNet</button>
+                    </div>
+                    </div>
                 <div class='form-group'>
                     <label class='control-label' for='sendFrom'>Account</label>
                     <div class='input-group' style='margin-top: 8px'>
