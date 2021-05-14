@@ -1,6 +1,17 @@
 var web3 = new Web3();
 var global_keystore;
 
+var clipboard = new ClipboardJS('.btn-clipboard');
+
+clipboard.on('success', function(e) {
+    e.clearSelection();
+});
+
+clipboard.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+});
+
 function setWeb3Provider(keystore) {
   var web3Provider = new HookedWeb3Provider({
     host: "https://ropsten.infura.io/v3/7a8fad4bf24d43c4bf567d30da2cd05e",
@@ -16,6 +27,7 @@ function setProvider(index) {
   } else if(index === 1) {
     document.getElementById("providerBtn").innerText = 'TestNet';
   }
+
 }
 
 function newAddresses(password) {

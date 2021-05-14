@@ -75,7 +75,14 @@ function ETHER_WALLET_form_shortcode( $attributes )
                     <div class='input-group-prepend'>
                         <span class='input-group-text'>Account</span>
                     </div>
-                    <input id='sendFrom' class='form-control'></input>
+                    <input id='accountAddress' class='form-control'></input>
+                    <span class='input-group-append'>
+                        <button class='button btn btn-default btn-right btn-clipboard' type='button'
+                            data-clipboard-target='#accountAddress'
+                            data-clipboard-action='copy'>
+                            <i class='fa fa-clipboard' aria-hidden='true'></i>
+                        </button>
+                    </span>
                 </div>
 
                 <div class='input-group' style='margin-top: 8px'>
@@ -116,9 +123,9 @@ function ETHER_WALLET_form_shortcode( $attributes )
                     </span>
                 </div>
 
-                <div class='btn-group d-flex w-100' role='group' style='margin-top: 8px;'>
-                    <button id='ethereum-wallet-export-priv-button' class='button btn btn-default w-100' onclick='exportPrivateKey()'>Export Privatekey</button>
-                    <button id='ethereum-wallet-show-seed-button' class='button btn btn-default w-100' onclick='showSeed()'>Show Seed</button>
+                <div class='d-flex w-100' role='group' style='margin-top: 8px;'>
+                    <button class='button btn btn-default w-100' style='margin-right:5px' onclick='exportPrivateKey()'>Export Privatekey</button>
+                    <button class='button btn btn-default w-100' style='margin-left:5px' onclick='showSeed()'>Show Seed</button>
                 </div>
                 <div class='form-group'>
                     <label class='control-label' for='addr'>Balance:</label>
@@ -127,7 +134,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
                 </div>
 
                 <div class='form-group'>
-                    <button type='button' class='button btn btn-default' data-toggle='modal' data-target='#sendModal'>Send</button>
+                    <button type='button' class='button btn btn-default btn-block' data-toggle='modal' data-target='#sendModal'>Send</button>
                 </div>
 
                 <div class='modal fade' id='sendModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -387,7 +394,8 @@ function ETHER_WALLET_enqueue_script()
         wp_deregister_script( 'functions' );
         wp_register_script(
             'functions',
-            $ETHER_WALLET_plugin_url_path . "/functions.js"
+            $ETHER_WALLET_plugin_url_path . "/functions.js",
+            array('clipboard')
         );
     }
 
