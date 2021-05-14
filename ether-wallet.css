@@ -188,3 +188,7 @@ li.list-group-item.ethereum-wallet-balance-content {
 .twbs .ethereum-wallet-accounts-table-avatar-img {
     width: 64px;
 }
+
+.input-button {
+    width: 50px;
+}

@@ -62,22 +62,22 @@ function ETHER_WALLET_form_shortcode( $attributes )
         <div class='card'>
             <div class='card-body'>
                 <h2 class='card-title'>Ether Wallet</h5>
-                <div class='dropdown'>
+                <div class='dropdown' style='margin-top: 20px'>
                     <button class='btn btn-primary dropdown-toggle btn-block' type='button' id='providerBtn' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                         MainNet
                     </button>
-                    <div class='dropdown-menu btn-block' aria-labelledby='dropdownMenuButton'>
+                    <div class='dropdown-menu btn-block' aria-labelledby='dropdownMenuButton' style='margin: 0'>
                         <button class='dropdown-item' type='button' onclick='setProvider(0);'>MainNet</button>
                         <button class='dropdown-item' type='button' onclick='setProvider(1);'>TestNet</button>
                     </div>
                 </div>
-                <div class='input-group' style='margin-top: 8px'>
+                <div class='input-group' style='margin-top: 15px'>
                     <div class='input-group-prepend'>
                         <span class='input-group-text'>Account</span>
                     </div>
                     <input id='accountAddress' class='form-control'></input>
                     <span class='input-group-append'>
-                        <button class='button btn btn-default btn-right btn-clipboard' type='button'
+                        <button class='button btn btn-default btn-right btn-clipboard input-button' type='button'
                             data-clipboard-target='#accountAddress'
                             data-clipboard-action='copy'>
                             <i class='fa fa-clipboard' aria-hidden='true'></i>
@@ -85,14 +85,14 @@ function ETHER_WALLET_form_shortcode( $attributes )
                     </span>
                 </div>
 
-                <div class='input-group' style='margin-top: 8px'>
+                <div class='input-group' style='margin-top: 10px'>
                     <div class='input-group-prepend'>
                         <span class='input-group-text'>New Wallet</span>
                     </div>
                     <input id='userEntropy' class='form-control' placeholder='Type random text to generate entropy' size='80' type='text' />
                     <span class='input-group-append'>
                         <div class='btn-group' role='group'>
-                            <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
+                            <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button input-button' type='button' 
                                     data-toggle='collapse' 
                                     onclick='newWallet()'
                                     role='button' aria-expanded='false' 
@@ -104,14 +104,14 @@ function ETHER_WALLET_form_shortcode( $attributes )
                     </span>
                 </div>
 
-                <div class='input-group' style='margin-top: 8px'>
+                <div class='input-group' style='margin-top: 10px'>
                     <div class='input-group-prepend'>
                         <span class='input-group-text'>Restore Wallet</span>
                     </div>
                     <input id='seed' class='form-control' size='80' type='text' value=''/>
                     <span class='input-group-append'>
                         <div class='btn-group' role='group'>
-                            <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
+                            <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button input-button' type='button' 
                                     data-toggle='collapse' 
                                     onclick='setSeed()'
                                     role='button' aria-expanded='false' 
@@ -123,11 +123,11 @@ function ETHER_WALLET_form_shortcode( $attributes )
                     </span>
                 </div>
 
-                <div class='d-flex w-100' role='group' style='margin-top: 8px;'>
+                <div class='d-flex w-100' role='group' style='margin-top: 15px;'>
                     <button class='button btn btn-default w-100' style='margin-right:5px' onclick='exportPrivateKey()'>Export Privatekey</button>
                     <button class='button btn btn-default w-100' style='margin-left:5px' onclick='showSeed()'>Show Seed</button>
                 </div>
-                <div class='form-group'>
+                <div class='form-group' style='margin-top: 15px;'>
                     <label class='control-label' for='addr'>Balance:</label>
                     <ul class='list-group' id='addr'>
                     </ul>

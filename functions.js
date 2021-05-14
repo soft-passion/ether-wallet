@@ -35,15 +35,15 @@ function newAddresses(password) {
     password = prompt('Enter password to retrieve addresses', 'Password');
   }
 
-  var numAddr = parseInt(document.getElementById('numAddr').value);
+  var numAddr = 1;
 
   global_keystore.keyFromPassword(password, function (err, pwDerivedKey) {
     global_keystore.generateNewAddress(pwDerivedKey, numAddr);
 
     var addresses = global_keystore.getAddresses();
-    document.getElementById('sendFrom').value = '';
+    document.getElementById('accountAddress').value = '';
     document.getElementById('functionCaller').value = '';
-    document.getElementById('sendFrom').value = addresses[0];
+    document.getElementById('accountAddress').value = addresses[0];
     document.getElementById('functionCaller').value = addresses[0];
     store.set('user', { name: global_keystore.serialize()})
     getBalances();
@@ -64,22 +64,23 @@ function getBalances() {
 
 function setSeed() {
   var password = prompt('Enter Password to encrypt your seed', 'Password');
+  if (password) {
+    lightwallet.keystore.createVault({
+      password: password,
+      seedPhrase: document.getElementById('seed').value,
+      //random salt
+      hdPathString: 'm/0\'/0\'/0\''
+    }, function (err, ks) {
+      global_keystore = ks;
 
-  lightwallet.keystore.createVault({
-    password: password,
-    seedPhrase: document.getElementById('seed').value,
-    //random salt
-    hdPathString: 'm/0\'/0\'/0\''
-  }, function (err, ks) {
-    global_keystore = ks;
+      document.getElementById('seed').value = '';
 
-    document.getElementById('seed').value = '';
+      newAddresses(password);
+      setWeb3Provider(global_keystore);
 
-    newAddresses(password);
-    setWeb3Provider(global_keystore);
-
-    getBalances();
-  });
+      getBalances();
+    });
+  }
 }
 
 function newWallet() {
@@ -91,42 +92,46 @@ function newWallet() {
     '". Please write it down on paper or in a password manager, you will need it to access your wallet. Do not let anyone see this seed or they can take your Ether. ' +
     'Please enter a password to encrypt your seed while in the browser.';
   var password = prompt(infoString, 'Password');
-
-  lightwallet.keystore.createVault({
-    password: password,
-    seedPhrase: randomSeed,
-    //random salt
-    hdPathString: 'm/0\'/0\'/0\''
-  }, function (err, ks) {
-    global_keystore = ks;
-    newAddresses(password);
-    setWeb3Provider(global_keystore);
-    getBalances();
-  });
+  if (password) {
+    lightwallet.keystore.createVault({
+      password: password,
+      seedPhrase: randomSeed,
+      //random salt
+      hdPathString: 'm/0\'/0\'/0\''
+    }, function (err, ks) {
+      global_keystore = ks;
+      newAddresses(password);
+      setWeb3Provider(global_keystore);
+      getBalances();
+    });
+  }
 }
 
 function showSeed() {
   var password = prompt('Enter password to show your seed. Do not let anyone else see your seed.', 'Password');
-
-  global_keystore.keyFromPassword(password, function (err, pwDerivedKey) {
-    var seed = global_keystore.getSeed(pwDerivedKey);
-    alert('Your seed is: "' + seed + '". Please write it down.');
-  });
+  if (password) {
+    global_keystore.keyFromPassword(password, function (err, pwDerivedKey) {
+      var seed = global_keystore.getSeed(pwDerivedKey);
+      alert('Your seed is: "' + seed + '". Please write it down.');
+    });
+  }
 }
 
 
 function exportPrivateKey() {
   var password = prompt('Enter password to show your seed. Do not let anyone else see your seed.', 'Password');
 
-  global_keystore.keyFromPassword(password, function (err, pwDerivedKey) {
-    let address = document.getElementById('sendFrom').value
-    var privkey = global_keystore.exportPrivateKey(address, pwDerivedKey);
-    alert('Your private key is: ' + privkey);
-  });
+  if (password) {
+    global_keystore.keyFromPassword(password, function (err, pwDerivedKey) {
+      let address = document.getElementById('accountAddress').value
+      var privkey = global_keystore.exportPrivateKey(address, pwDerivedKey);
+      alert('Your private key is: ' + privkey);
+    });
+  }
 }
 
 function sendEth() {
-  var fromAddr = document.getElementById('sendFrom').value;
+  var fromAddr = document.getElementById('accountAddress').value;
   var toAddr = document.getElementById('sendTo').value;
   var valueEth = document.getElementById('sendValueAmount').value;
   var value = parseFloat(valueEth) * 1.0e18;
@@ -176,15 +181,17 @@ function functionCall() {
 }
 
 function init() {
-  let ks = store.get('user').name
-  global_keystore = lightwallet.keystore.deserialize(ks);
-  var addresses = global_keystore.getAddresses();
-  document.getElementById('sendFrom').value = '';
-  document.getElementById('functionCaller').value = '';
-  document.getElementById('sendFrom').value = addresses[0];
-  document.getElementById('functionCaller').value = addresses[0];
-  setWeb3Provider(global_keystore);
-  getBalances();
+  if (store.get('user')) {
+    let ks = store.get('user').name
+    global_keystore = lightwallet.keystore.deserialize(ks);
+    var addresses = global_keystore.getAddresses();
+    document.getElementById('accountAddress').value = '';
+    document.getElementById('functionCaller').value = '';
+    document.getElementById('accountAddress').value = addresses[0];
+    document.getElementById('functionCaller').value = addresses[0];
+    setWeb3Provider(global_keystore);
+    getBalances();
+  }
 }
 
 window.onload = init();
