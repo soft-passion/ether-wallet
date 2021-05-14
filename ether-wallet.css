@@ -192,3 +192,19 @@ li.list-group-item.ethereum-wallet-balance-content {
 .input-button {
     width: 50px;
 }
+
+.top-margin-15 {
+    margin-top: 15px;
+}
+
+.top-margin-10 {
+    margin-top: 10px;
+}
+
+.top-margin-20 {
+    margin-top: 20px;
+}
+
+.margin-0 {
+    margin: 0px !important;
+}

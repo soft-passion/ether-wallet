@@ -57,7 +57,7 @@ function getBalances() {
   async.map(addresses, web3.eth.getBalance, function (err, balances) {
     async.map(addresses, web3.eth.getTransactionCount, function (err, nonces) {
       document.getElementById('addr').innerHTML = '';
-        document.getElementById('addr').innerHTML += '<li class="list-group-item form-control">' + addresses[0] + ' (Bal: ' + (balances[0] / 1.0e18) + ' ETH, Nonce: ' + nonces[0] + ')' + '</li>';
+        document.getElementById('addr').innerHTML += '<li class="list-group-item form-control">Bal: ' + (balances[0] / 1.0e18) + ' ETH<br>Nonce: ' + nonces[0] + '</li>';
     });
   });
 }
