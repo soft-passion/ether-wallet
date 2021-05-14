@@ -3,10 +3,6 @@
   "version": "4.0.0",
   "description": "A lightweight ethereum javascript wallet.",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ConsenSys/eth-lightwallet.git"
-  },
   "scripts": {
     "build-js": "browserify index.js --s lightwallet -g [ babelify --presets [ @babel/preset-env @babel/preset-react ] ] | uglifyjs -c > dist/lightwallet.min.js",
     "build-dev": "browserify index.js -o dist/lightwallet.js --s lightwallet -g [ babelify --presets [ @babel/preset-env @babel/preset-react ] ]",
@@ -20,44 +16,6 @@
     "transactions",
     "contracts",
     "wallet"
-  ],
-  "contributors": [
-    {
-      "name": "Christian Lundkvist",
-      "email": "christian.lundkvist@gmail.com"
-    },
-    {
-      "name": "Tyler Clark",
-      "email": "tysclark@gmail.com"
-    },
-    {
-      "name": "Joel Torstensson",
-      "email": "me@joeltorstensson.se"
-    },
-    {
-      "name": "Zach Ferland",
-      "email": "zachferland@gmail.com"
-    },
-    {
-      "name": "Kevin Jiao",
-      "email": "kevin.jiao@berkeley.edu"
-    },
-    {
-      "name": "Marian Oancea",
-      "email": "marian.oancea@gmail.com"
-    },
-    {
-      "name": "John McDowall",
-      "email": "john@kantan.io"
-    },
-    {
-      "name": "Milad Mostavi",
-      "email": "milad.mostavi@gmail.com"
-    },
-    {
-      "name": "Slava Matvienco",
-      "email": "slava.matvienco@gmail.com"
-    }
   ],
   "license": "MIT",
   "dependencies": {
