@@ -63,82 +63,63 @@ function ETHER_WALLET_form_shortcode( $attributes )
             <div class='card-body'>
                 <h2 class='card-title'>Ether Wallet</h5>
                 <div class='dropdown'>
-                    <button class='btn btn-primary dropdown-toggle' type='button' id='providerBtn' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                    <button class='btn btn-primary dropdown-toggle btn-block' type='button' id='providerBtn' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                         MainNet
                     </button>
-                    <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                    <div class='dropdown-menu btn-block' aria-labelledby='dropdownMenuButton'>
                         <button class='dropdown-item' type='button' onclick='setProvider(0);'>MainNet</button>
                         <button class='dropdown-item' type='button' onclick='setProvider(1);'>TestNet</button>
                     </div>
-                    </div>
-                <div class='form-group'>
-                    <label class='control-label' for='sendFrom'>Account</label>
-                    <div class='input-group' style='margin-top: 8px'>
-                        <input id='sendFrom' class='form-control'></input>
-                    </div>
                 </div>
-                <div class='form-group'>
-                    <label class='control-label' for='userEntropy'>New Wallet</label>
-                    <div class='input-group' style='margin-top: 8px'>
-                        <input id='userEntropy' class='form-control' placeholder='Type random text to generate entropy' size='80' type='text' />
-                        <span class='input-group-append'>
-                            <div class='btn-group' role='group'>
-                                <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
-                                        data-toggle='collapse' 
-                                        onclick='newWallet()'
-                                        role='button' aria-expanded='false' 
-                                        aria-controls='ethereum-wallet-to-qr1' 
-                                        title='Create New Wallet'>
-                                    <i class='fa fa-file' aria-hidden='true'></i>
-                                </button>
-                            </div>
-                        </span>
+                <div class='input-group' style='margin-top: 8px'>
+                    <div class='input-group-prepend'>
+                        <span class='input-group-text'>Account</span>
                     </div>
+                    <input id='sendFrom' class='form-control'></input>
                 </div>
 
-                <div class='form-group'>
-                    <label class='control-label' for='seed'>Restore Wallet</label>
-                    <div class='input-group' style='margin-top: 8px'>
-                        <input id='seed' class='form-control' size='80' type='text' value=''/>
-                        <span class='input-group-append'>
-                            <div class='btn-group' role='group'>
-                                <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
-                                        data-toggle='collapse' 
-                                        onclick='setSeed()'
-                                        role='button' aria-expanded='false' 
-                                        aria-controls='ethereum-wallet-to-qr1' 
-                                        title='Restore wallet from Seed'>
-                                    <i class='fa fa-folder-open' aria-hidden='true'></i>
-                                </button>
-                            </div>
-                        </span>
+                <div class='input-group' style='margin-top: 8px'>
+                    <div class='input-group-prepend'>
+                        <span class='input-group-text'>New Wallet</span>
                     </div>
+                    <input id='userEntropy' class='form-control' placeholder='Type random text to generate entropy' size='80' type='text' />
+                    <span class='input-group-append'>
+                        <div class='btn-group' role='group'>
+                            <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
+                                    data-toggle='collapse' 
+                                    onclick='newWallet()'
+                                    role='button' aria-expanded='false' 
+                                    aria-controls='ethereum-wallet-to-qr1' 
+                                    title='Create New Wallet'>
+                                <i class='fa fa-file' aria-hidden='true'></i>
+                            </button>
+                        </div>
+                    </span>
                 </div>
 
-                <div class='form-group' style='display:none'>
-                    <label class='control-label' for='numAddr'>Show Addresses</label>
-                    <div class='input-group' style='margin-top: 8px'>
-                        <input id='numAddr' class='form-control' size='80' type='text' value='3'/>
-                        <span class='input-group-append'>
-                            <div class='btn-group' role='group'>
-                                <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
-                                        data-toggle='collapse' 
-                                        onclick='newAddresses(\'\')'
-                                        role='button' aria-expanded='false' 
-                                        aria-controls='ethereum-wallet-to-qr1' 
-                                        title='Show'>
-                                    <i class='fa fa-check-circle' aria-hidden='true'></i>
-                                </button>
-                            </div>
-                        </span>
+                <div class='input-group' style='margin-top: 8px'>
+                    <div class='input-group-prepend'>
+                        <span class='input-group-text'>Restore Wallet</span>
                     </div>
+                    <input id='seed' class='form-control' size='80' type='text' value=''/>
+                    <span class='input-group-append'>
+                        <div class='btn-group' role='group'>
+                            <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button' type='button' 
+                                    data-toggle='collapse' 
+                                    onclick='setSeed()'
+                                    role='button' aria-expanded='false' 
+                                    aria-controls='ethereum-wallet-to-qr1' 
+                                    title='Restore wallet from Seed'>
+                                <i class='fa fa-folder-open' aria-hidden='true'></i>
+                            </button>
+                        </div>
+                    </span>
                 </div>
 
-                <div class='form-group'>
-                    <button id='ethereum-wallet-export-priv-button' class='button btn btn-default col-12 col-md-4' onclick='exportPrivateKey()'>Export Privatekey</button>
-                    <button id='ethereum-wallet-show-seed-button' class='button btn btn-default col-12 col-md-4 float-right' onclick='showSeed()'>Show Seed</button>
+                <div class='btn-group d-flex w-100' role='group' style='margin-top: 8px;'>
+                    <button id='ethereum-wallet-export-priv-button' class='button btn btn-default w-100' onclick='exportPrivateKey()'>Export Privatekey</button>
+                    <button id='ethereum-wallet-show-seed-button' class='button btn btn-default w-100' onclick='showSeed()'>Show Seed</button>
                 </div>
-
                 <div class='form-group'>
                     <label class='control-label' for='addr'>Balance:</label>
                     <ul class='list-group' id='addr'>
