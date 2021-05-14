@@ -142,10 +142,11 @@ function ETHER_WALLET_form_shortcode( $attributes )
 
                 <div class='modal fade' id='sendModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                     <div class='modal-dialog' role='document'>
+                        <div class='modal-backdrop fade show' style='z-index:0'></div>
                         <div class='modal-content'>
                         <div class='modal-header'>
-                            <h5 class='modal-title' id='exampleModalLabel'>Modal title</h5>
-                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                            <h2 class='modal-title' id='exampleModalLabel'>Send Ether</h5>
+                            <button type='button' class='close' data-dismiss='modal' aria-label='Close' style='margin:0px'>
                             <span aria-hidden='true'>&times;</span>
                             </button>
                         </div>
@@ -414,7 +415,7 @@ function ETHER_WALLET_enqueue_script()
         wp_deregister_script( 'web3provider' );
         wp_register_script(
             'web3provider',
-            $ETHER_WALLET_plugin_url_path . "/js/hooked-web3-provider.js",
+            $ETHER_WALLET_plugin_url_path . "/js/hooked-web3-provider.js"
         );
     }
 
@@ -423,7 +424,7 @@ function ETHER_WALLET_enqueue_script()
         wp_deregister_script( 'async' );
         wp_register_script(
             'async',
-            $ETHER_WALLET_plugin_url_path . "/js/async.js",
+            $ETHER_WALLET_plugin_url_path . "/js/async.js"
         );
     }
 
