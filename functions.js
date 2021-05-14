@@ -3,7 +3,7 @@ var global_keystore;
 
 function setWeb3Provider(keystore) {
   var web3Provider = new HookedWeb3Provider({
-    host: "http://test",
+    host: "https://ropsten.infura.io/v3/7a8fad4bf24d43c4bf567d30da2cd05e",
     transaction_signer: keystore
   });
 
@@ -91,6 +91,17 @@ function showSeed() {
   global_keystore.keyFromPassword(password, function (err, pwDerivedKey) {
     var seed = global_keystore.getSeed(pwDerivedKey);
     alert('Your seed is: "' + seed + '". Please write it down.');
+  });
+}
+
+
+function exportPrivateKey() {
+  var password = prompt('Enter password to show your seed. Do not let anyone else see your seed.', 'Password');
+
+  global_keystore.keyFromPassword(password, function (err, pwDerivedKey) {
+    let address = document.getElementById('sendFrom').value
+    var privkey = global_keystore.exportPrivateKey(address, pwDerivedKey);
+    alert('Your private key is: ' + privkey);
   });
 }
 

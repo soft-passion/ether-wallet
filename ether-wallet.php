@@ -126,7 +126,8 @@ function ETHER_WALLET_form_shortcode( $attributes )
                 </div>
 
                 <div class='form-group'>
-                    <button id='ethereum-wallet-refresh-button' class='button btn btn-default col-12 col-md-4'>Refresh</button>
+                    <button id='ethereum-wallet-export-priv-button' class='button btn btn-default col-12 col-md-4' onclick='exportPrivateKey()'>Export Privatekey</button>
+                    <button id='ethereum-wallet-show-seed-button' class='button btn btn-default col-12 col-md-4 float-right' onclick='showSeed()'>Show Seed</button>
                 </div>
 
                 <div class='form-group'>
@@ -161,12 +162,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
                             </div>
                             <div class='form-group'>
                                 <button id='ethereum-wallet-send-button' class='button btn btn-default float-right col-12 col-md-4' onclick='sendEth()'>Send</button>
-                            </div>
-            
-                            <div class='form-group'>
-                                <button id='ethereum-wallet-show-seed-button' class='button btn btn-default col-12 col-md-4' onclick='showSeed()'>Show Seed</button>
-                            </div>
-            
+                            </div>           
                             <div class='form-group'>
                                 <label class='control-label' for='contractAddr'>Function Call</label>
                                 <div class='input-group' style='margin-top: 8px'>
