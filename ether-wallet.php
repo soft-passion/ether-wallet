@@ -435,7 +435,7 @@ function ETHER_WALLET_enqueue_script()
         wp_deregister_script( 'ether-wallet' );
         wp_register_script(
             'ether-wallet',
-            $ETHER_WALLET_plugin_url_path . "/lightwallet.js",
+            $ETHER_WALLET_plugin_url_path . "/dist/lightwallet.js",
             array( 'jquery', 'web3', 'web3provider', 'store', 'async')
         );
     }
