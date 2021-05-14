@@ -1,6 +1,7 @@
 var web3 = new Web3();
 var global_keystore;
-
+let hosts = ["https://mainnet.infura.io/v3/", 'https://ropsten.infura.io/v3/7a8fad4bf24d43c4bf567d30da2cd05e'];
+var providerId = 0
 var clipboard = new ClipboardJS('.btn-clipboard');
 
 clipboard.on('success', function(e) {
@@ -14,7 +15,7 @@ clipboard.on('error', function(e) {
 
 function setWeb3Provider(keystore) {
   var web3Provider = new HookedWeb3Provider({
-    host: "https://ropsten.infura.io/v3/7a8fad4bf24d43c4bf567d30da2cd05e",
+    host: hosts[providerId],
     transaction_signer: keystore
   });
 
@@ -27,7 +28,12 @@ function setProvider(index) {
   } else if(index === 1) {
     document.getElementById("providerBtn").innerText = 'TestNet';
   }
-
+  providerId = index
+  store.set('providerId', providerId)
+  if (global_keystore) {
+    setWeb3Provider(global_keystore)
+    getBalances()
+  }
 }
 
 function newAddresses(password) {
@@ -150,8 +156,12 @@ function sendEth() {
         gasPrice: result,
         gas: result1
       }, function (err2, txhash) {
-        console.log('error2: ' + err2);
-        console.log('txhash: ' + txhash);
+        if (err2) {
+          alert('Transaction Faild: ' + err2);
+        } else {
+          location.reload();
+          alert('Transaction succeeded. This is transaction hash: ' + txhash);
+        }        
       })
     })
   });
@@ -189,6 +199,14 @@ function init() {
     document.getElementById('functionCaller').value = '';
     document.getElementById('accountAddress').value = addresses[0];
     document.getElementById('functionCaller').value = addresses[0];
+    if(store.get('providerId') !== 'undefined') {
+      providerId = store.get('providerId')
+      if(providerId === 0) {
+        document.getElementById("providerBtn").innerText = 'MainNet';
+      } else if(providerId === 1) {
+        document.getElementById("providerBtn").innerText = 'TestNet';
+      }
+    }
     setWeb3Provider(global_keystore);
     getBalances();
   }

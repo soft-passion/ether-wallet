@@ -2,12 +2,9 @@
 
 /*
 Plugin Name: Ether Wallet
-Plugin URI: https://wordpress.org/plugins/ether-wallet/
 Description: Wallet for Ether and ERC20 tokens for WordPress
 Version: 1.0
-Author: unkown
-Text Domain: ether-wallet
-Domain Path: /languages
+Author: jjsiit
 */
 
 if ( !defined( 'ABSPATH' ) ) {
