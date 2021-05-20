@@ -60,12 +60,12 @@ function ETHER_WALLET_form_shortcode( $attributes )
             <div class='card-body'>
                 <h2 class='card-title'>Ether Wallet</h5>
                 <div class='dropdown top-margin-20'>
-                    <button class='btn btn-primary dropdown-toggle btn-block' type='button' id='providerBtn' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                    <button class='btn btn-primary dropdown-toggle btn-block' id='providerBtn' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                         MainNet
                     </button>
                     <div class='dropdown-menu btn-block margin-0' aria-labelledby='dropdownMenuButton'>
-                        <button class='dropdown-item' type='button' onclick='setProvider(0);'>MainNet</button>
-                        <button class='dropdown-item' type='button' onclick='setProvider(1);'>TestNet</button>
+                        <button class='dropdown-item' onclick='setProvider(0);'>MainNet</button>
+                        <button class='dropdown-item' onclick='setProvider(1);'>TestNet</button>
                     </div>
                 </div>
                 <div class='input-group top-margin-15'>
@@ -74,7 +74,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
                     </div>
                     <input id='accountAddress' class='form-control'></input>
                     <span class='input-group-append'>
-                        <button class='button btn btn-default btn-right btn-clipboard input-button' type='button'
+                        <button class='btn btn-default btn-right btn-clipboard input-button' type='button'
                             data-clipboard-target='#accountAddress'
                             data-clipboard-action='copy'>
                             <i class='fa fa-clipboard' aria-hidden='true'></i>
@@ -89,7 +89,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
                     <input id='userEntropy' class='form-control' placeholder='Type random text to generate entropy' size='80' type='text' />
                     <span class='input-group-append'>
                         <div class='btn-group' role='group'>
-                            <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button input-button' type='button' 
+                            <button class='btn btn-default btn-left d-md-inline input-button' type='button' 
                                     data-toggle='collapse' 
                                     onclick='newWallet()'
                                     role='button' aria-expanded='false' 
@@ -108,7 +108,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
                     <input id='seed' class='form-control' size='80' type='text' value=''/>
                     <span class='input-group-append'>
                         <div class='btn-group' role='group'>
-                            <button class='button btn btn-default btn-left d-md-inline ethereum-wallet-qr-scan-button input-button' type='button' 
+                            <button class='btn btn-default btn-left d-md-inline input-button' type='button' 
                                     data-toggle='collapse' 
                                     onclick='setSeed()'
                                     role='button' aria-expanded='false' 
@@ -121,8 +121,8 @@ function ETHER_WALLET_form_shortcode( $attributes )
                 </div>
 
                 <div class='d-flex w-100 top-margin-15' role='group'>
-                    <button class='button btn btn-default w-100' style='margin-right:5px' onclick='exportPrivateKey()'>Export Privatekey</button>
-                    <button class='button btn btn-default w-100' style='margin-left:5px' onclick='showSeed()'>Show Seed</button>
+                    <button class='btn btn-default w-100' style='margin-right:5px' onclick='exportPrivateKey()'>Export Privatekey</button>
+                    <button class='btn btn-default w-100' style='margin-left:5px' onclick='showSeed()'>Show Seed</button>
                 </div>
                 <div class='form-group top-margin-15'>
                     <label class='control-label' for='addr'>Balance:</label>
@@ -131,8 +131,8 @@ function ETHER_WALLET_form_shortcode( $attributes )
                 </div>
 
                 <div class='d-flex w-100 top-margin-15' role='group'>
-                    <button class='button btn btn-default w-100' style='margin-right:5px' data-toggle='modal' data-target='#sendEtherModal'>Send Ether</button>
-                    <button class='button btn btn-default w-100' style='margin-right:5px' data-toggle='modal' data-target='#sendTokenModal'>Send Token</button>
+                    <button class='btn btn-default w-100' style='margin-right:5px' data-toggle='modal' data-target='#sendEtherModal'>Send Ether</button>
+                    <button class='btn btn-default w-100' style='margin-right:5px' data-toggle='modal' data-target='#sendTokenModal'>Send Token</button>
                 </div>
 
                 <div class='modal fade' id='sendEtherModal' tabindex='-1' role='dialog' aria-labelledby='sendEtherModalLabel' aria-hidden='true'>
@@ -141,7 +141,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
                         <div class='modal-content'>
                             <div class='modal-header'>
                                 <h2 class='modal-title' id='sendEtherModalLabel'>Send Ether</h5>
-                                <button type='button' class='close margin-0' data-dismiss='modal' aria-label='Close'>
+                                <button class='close margin-0' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                                 </button>
                             </div>
@@ -151,7 +151,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
                                     <div class='input-group'>
                                         <input id='sendTo' size='40' type='text' class='form-control'/>
                                     </div>
-                                    <div class='top-margin-15'>
+                                    <div class='top-margin-10'>
                                         <label class='control-label margin-0' for='sendTo'>Amount: </label>
                                         <div class='input-group'>
                                             <input id='sendValueAmount' type='text' class='form-control'/>
@@ -160,8 +160,8 @@ function ETHER_WALLET_form_shortcode( $attributes )
                                 </div>
                             </div>
                             <div class='modal-footer'>
-                                <button id='ethereum-wallet-send-button' class='button btn btn-primary' onclick='sendEth()'>Send</button>
-                                <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                <button class='btn btn-primary' onclick='sendEth()'>Send</button>
+                                <button class='btn btn-default' data-dismiss='modal'>Close</button>
                             </div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
                         <div class='modal-content'>
                             <div class='modal-header'>
                                 <h2 class='modal-title' id='sendTokenModalLabel'>Send Token</h5>
-                                <button type='button' class='close margin-0' data-dismiss='modal' aria-label='Close'>
+                                <button class='close margin-0' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                                 </button>
                             </div>
@@ -183,31 +183,31 @@ function ETHER_WALLET_form_shortcode( $attributes )
                                     <div class='input-group'>
                                         <input id='functionCaller' class='form-control'></input>
                                     </div>
-                                    <div class='top-margin-15'>
+                                    <div class='top-margin-10'>
                                         <label class='control-label margin-0' for='contractAddr'>Contract Address:</label>
                                         <div class='input-group' >
                                             <input id='contractAddr' class='form-control' size='40' type='text' />
                                         </div>
                                     </div>
-                                    <div class='top-margin-15'>
+                                    <div class='top-margin-10'>
                                         <label class='control-label margin-0' for='contractAbi'>Contract ABI:</label>
                                         <div class='input-group'>
                                             <input id='contractAbi' class='form-control' size='40' type='text' />
                                         </div>
                                     </div>
-                                    <div class='top-margin-15'>
+                                    <div class='top-margin-10'>
                                         <label class='control-label margin-0' for='functionName'>Function Name:</label>
                                         <div class='input-group'>
                                             <input id='functionName' class='form-control' size='20' type='text' />
                                         </div>
                                     </div>
-                                    <div class='top-margin-15'>
+                                    <div class='top-margin-10'>
                                         <label class='control-label margin-0' for='functionArgs'>Function Arguments:</label>
                                         <div class='input-group'>
                                             <input id='functionArgs' class='form-control' size='20' type='text' />
                                         </div>
                                     </div>
-                                    <div class='top-margin-15'>
+                                    <div class='top-margin-10'>
                                         <label class='control-label margin-0' for='sendValueAmount'>Value (Ether):</label>
                                         <div class='input-group'>
                                             <input id='sendValueAmount' class='form-control' type='text' />
@@ -216,8 +216,8 @@ function ETHER_WALLET_form_shortcode( $attributes )
                                 </div>
                             </div>
                             <div class='modal-footer'>
-                                <button class='button btn btn-primary' onclick='functionCall()'>Call Function</button>
-                                <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                <button class='btn btn-primary' onclick='functionCall()'>Call Function</button>
+                                <button class='btn btn-default' data-dismiss='modal'>Close</button>
                             </div>
                         </div>
                     </div>
