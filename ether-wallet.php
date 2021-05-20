@@ -55,7 +55,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
     
     $js = '';
     $ret = "
-    <div class='twbs' style='max-width: 400px;'>
+    <div class='twbs' style='max-width: 450px;'>
         <div class='card'>
             <div class='card-body'>
                 <h2 class='card-title'>Ether Wallet</h5>
