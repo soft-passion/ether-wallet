@@ -55,7 +55,7 @@ function ETHER_WALLET_form_shortcode( $attributes )
     
     $js = '';
     $ret = "
-    <div class='twbs'>
+    <div class='twbs' style='max-width: 400px;'>
         <div class='card'>
             <div class='card-body'>
                 <h2 class='card-title'>Ether Wallet</h5>
@@ -130,83 +130,95 @@ function ETHER_WALLET_form_shortcode( $attributes )
                     </ul>
                 </div>
 
-                <div class='form-group top-margin-15'>
-                    <button type='button' class='button btn btn-default btn-block' data-toggle='modal' data-target='#sendModal'>Send</button>
+                <div class='d-flex w-100 top-margin-15' role='group'>
+                    <button class='button btn btn-default w-100' style='margin-right:5px' data-toggle='modal' data-target='#sendEtherModal'>Send Ether</button>
+                    <button class='button btn btn-default w-100' style='margin-right:5px' data-toggle='modal' data-target='#sendTokenModal'>Send Token</button>
                 </div>
 
-                <div class='modal fade' id='sendModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog' role='document'>
+                <div class='modal fade' id='sendEtherModal' tabindex='-1' role='dialog' aria-labelledby='sendEtherModalLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-dialog-centered' role='document'>
                         <div class='modal-backdrop fade show' style='z-index:0'></div>
                         <div class='modal-content'>
-                        <div class='modal-header'>
-                            <h2 class='modal-title' id='exampleModalLabel'>Send Ether</h5>
-                            <button type='button margin-0' class='close' data-dismiss='modal' aria-label='Close'>
-                            <span aria-hidden='true'>&times;</span>
-                            </button>
-                        </div>
-                        <div class='modal-body'>
-                            <div class='form-group'>
-                                <label class='control-label margin-0' for='sendTo'>To: </label>
-                                <div class='input-group'>
-                                    <input id='sendTo' size='40' type='text' class='form-control'/>
-                                </div>
-                                <div class='top-margin-15'>
-                                    <label class='control-label margin-0' for='sendTo'>Amount: </label>
+                            <div class='modal-header'>
+                                <h2 class='modal-title' id='sendEtherModalLabel'>Send Ether</h5>
+                                <button type='button' class='close margin-0' data-dismiss='modal' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <div class='form-group'>
+                                    <label class='control-label margin-0' for='sendTo'>To: </label>
                                     <div class='input-group'>
-                                        <input id='sendValueAmount' type='text' class='form-control'/>
+                                        <input id='sendTo' size='40' type='text' class='form-control'/>
+                                    </div>
+                                    <div class='top-margin-15'>
+                                        <label class='control-label margin-0' for='sendTo'>Amount: </label>
+                                        <div class='input-group'>
+                                            <input id='sendValueAmount' type='text' class='form-control'/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class='form-group top-margin-15'>
-                                <button id='ethereum-wallet-send-button' class='button btn btn-default w-100' onclick='sendEth()'>Send</button>
-                            </div>           
-                            <div class='form-group top-margin-20'>
-                                <label class='control-label margin-0' for='contractAddr'>Function Call</label>
-                                <div class='input-group'>
-                                    <input id='functionCaller' class='form-control'></input>
-                                </div>
-                                <div class='top-margin-15'>
-                                    <label class='control-label margin-0' for='contractAddr'>Contract Address:</label>
-                                    <div class='input-group' >
-                                        <input id='contractAddr' class='form-control' size='40' type='text' />
-                                    </div>
-                                </div>
-                                <div class='top-margin-15'>
-                                    <label class='control-label margin-0' for='contractAbi'>Contract ABI:</label>
+                            <div class='modal-footer'>
+                                <button id='ethereum-wallet-send-button' class='button btn btn-primary' onclick='sendEth()'>Send</button>
+                                <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='modal fade' id='sendTokenModal' tabindex='-1' role='dialog' aria-labelledby='sendTokenModalLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-dialog-centered' role='document'>
+                        <div class='modal-backdrop fade show' style='z-index:0'></div>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h2 class='modal-title' id='sendTokenModalLabel'>Send Token</h5>
+                                <button type='button' class='close margin-0' data-dismiss='modal' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <div class='form-group top-margin-20'>
+                                    <label class='control-label margin-0' for='contractAddr'>Function Call</label>
                                     <div class='input-group'>
-                                        <input id='contractAbi' class='form-control' size='40' type='text' />
+                                        <input id='functionCaller' class='form-control'></input>
                                     </div>
-                                </div>
-                                <div class='top-margin-15'>
-                                    <label class='control-label margin-0' for='functionName'>Function Name:</label>
-                                    <div class='input-group'>
-                                        <input id='functionName' class='form-control' size='20' type='text' />
+                                    <div class='top-margin-15'>
+                                        <label class='control-label margin-0' for='contractAddr'>Contract Address:</label>
+                                        <div class='input-group' >
+                                            <input id='contractAddr' class='form-control' size='40' type='text' />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class='top-margin-15'>
-                                    <label class='control-label margin-0' for='functionArgs'>Function Arguments:</label>
-                                    <div class='input-group'>
-                                        <input id='functionArgs' class='form-control' size='20' type='text' />
+                                    <div class='top-margin-15'>
+                                        <label class='control-label margin-0' for='contractAbi'>Contract ABI:</label>
+                                        <div class='input-group'>
+                                            <input id='contractAbi' class='form-control' size='40' type='text' />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class='top-margin-15'>
-                                    <label class='control-label margin-0' for='sendValueAmount'>Value (Ether):</label>
-                                    <div class='input-group'>
-                                        <input id='sendValueAmount' class='form-control' type='text' />
+                                    <div class='top-margin-15'>
+                                        <label class='control-label margin-0' for='functionName'>Function Name:</label>
+                                        <div class='input-group'>
+                                            <input id='functionName' class='form-control' size='20' type='text' />
+                                        </div>
+                                    </div>
+                                    <div class='top-margin-15'>
+                                        <label class='control-label margin-0' for='functionArgs'>Function Arguments:</label>
+                                        <div class='input-group'>
+                                            <input id='functionArgs' class='form-control' size='20' type='text' />
+                                        </div>
+                                    </div>
+                                    <div class='top-margin-15'>
+                                        <label class='control-label margin-0' for='sendValueAmount'>Value (Ether):</label>
+                                        <div class='input-group'>
+                                            <input id='sendValueAmount' class='form-control' type='text' />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-            
-                            <div class='form-group'>
-                                <button 
-                                    id='ethereum-wallet-account-management-create-send-button' 
-                                    name='ethereum-wallet-account-management-create-send-button' 
-                                    class='button btn btn-default w-100' onclick='functionCall()'>Call Function</button>
+                            <div class='modal-footer'>
+                                <button class='button btn btn-primary' onclick='functionCall()'>Call Function</button>
+                                <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
                             </div>
-                        </div>
-                        <div class='modal-footer'>
-                            <button type='button' class='btn btn-primary' data-dismiss='modal'>Close</button>
-                        </div>
                         </div>
                     </div>
                 </div>
